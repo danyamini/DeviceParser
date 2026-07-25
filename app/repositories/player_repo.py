@@ -1,10 +1,13 @@
 from app.domain.player import Player
 from app.db.session import SessionLocal
 
-def create_player(nickname: str):
+def create_player(player_data: dict):
     db = SessionLocal()
 
-    player = Player(nickname=nickname)
+    player = Player(
+        nickname = player_data["name"],
+        profile_url=player_data["profile_url"]
+    )
 
     db.add(player)
     db.commit()

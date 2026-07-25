@@ -4,8 +4,8 @@ from app.repositories.player_repo import create_player
 def sync_players():
     players = get_scraped_players()
 
-    for nickname in players:
-        create_player(nickname)
+    for player in players:
+        create_player(player)
 
 def sync_preview():
     players = get_scraped_players()
