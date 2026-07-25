@@ -33,10 +33,10 @@ def parse_players(html: str):
 
     return players
 
-def get_players():
+def get_scraped_players():
     html = fetch_cs2_players()
     return parse_players(html)
 
 if __name__ == "__main__":
-    players = get_players()
+    players = get_scraped_players()
     print(players)

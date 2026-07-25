@@ -3,7 +3,7 @@ from app.repositories.player_repo import create_player, get_players, get_player
 from pydantic import BaseModel
 from app.db.session import SessionLocal
 from app.domain.player import Player
-from app.services.player_service import sync_players
+from app.services.player_service import sync_players, sync_preview
 
 class PlayerCreate(BaseModel):
     nickname: str
@@ -24,16 +24,17 @@ def read_players():
     players = get_players()
     return players
 
+@router.get("/preview")
+def preview_players():
+    players = sync_preview()
+    return players
+
 @router.get("/{id}")
 def read_player(player_id: int):
     print("HIT")
     player = get_player(player_id)
     return player
 
-@router.get("/preview")
-def preview_playters():
-    players = sync_ preview()
-    return players
 
 @router.post("/sync")
 def sync():
