@@ -5,8 +5,13 @@ def create_player(player_data: dict):
     db = SessionLocal()
 
     player = Player(
-        nickname = player_data["name"],
-        profile_url=player_data["profile_url"]
+        nickname=player_data["nickname"],
+        profile_url=player_data["profile_url"],
+        mouse=player_data["mouse"],
+        monitor=player_data["monitor"],
+        mousepad=player_data["mousepad"],
+        keyboard=player_data["keyboard"],
+        headset=player_data["headset"]
     )
 
     db.add(player)
