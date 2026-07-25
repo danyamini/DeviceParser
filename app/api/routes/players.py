@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.repositories.player_repo import create_player, get_players, get_player
+from app.repositories.player_repo import get_players, get_player
 from pydantic import BaseModel
 from app.db.session import SessionLocal
 from app.domain.player import Player

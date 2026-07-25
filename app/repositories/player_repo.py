@@ -1,20 +1,33 @@
 from app.domain.player import Player
 from app.db.session import SessionLocal
 
-def create_player(player_data: dict):
+def save_player(player_data: dict):
     db = SessionLocal()
 
-    player = Player(
-        nickname=player_data["nickname"],
-        profile_url=player_data["profile_url"],
-        mouse=player_data["mouse"],
-        monitor=player_data["monitor"],
-        mousepad=player_data["mousepad"],
-        keyboard=player_data["keyboard"],
-        headset=player_data["headset"]
-    )
+    player = db.query(Player).filter(
+        Player.profile_url == player_data["profile_url"]
+    ).first()
 
-    db.add(player)
+    if player:
+        player.nickname = player_data["nickname"]
+        player.mouse = player_data["mouse"]
+        player.monitor = player_data["monitor"]
+        player.mousepad = player_data["mousepad"]
+        player.keyboard = player_data["keyboard"]
+        player.headset = player_data["headset"]
+
+    else:
+        player = Player(
+            nickname=player_data["nickname"],
+            profile_url=player_data["profile_url"],
+            mouse=player_data["mouse"],
+            monitor=player_data["monitor"],
+            mousepad=player_data["mousepad"],
+            keyboard=player_data["keyboard"],
+            headset=player_data["headset"]
+        )
+        db.add(player)
+
     db.commit()
     db.refresh(player)
 
